@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Фишинг-Сканер</title>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: 50px auto; text-align: center; }
+        input { width: 80%; padding: 10px; margin-bottom: 10px; }
+        button { padding: 10px 20px; cursor: pointer; background: #007bff; color: white; border: none; }
+        .safe { color: green; }
+        .danger { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Проверка ссылки</h1>
+    <form method="POST">
+        <input type="url" name="url" placeholder="https://example.com" required>
+        <button type="submit">Проверить</button>
+    </form>
+
+    {% if result %}
+        <h3>Результаты для: {{ url }}</h3>
+        <p class="{{ 'danger' if result.malicious > 0 else 'safe' }}">
+            Вредоносных срабатываний: {{ result.malicious }} <br>
+            Подозрительных: {{ result.suspicious }}
+        </p>
+        <p>Безвредно: {{ result.harmless }}</p>
+    {% endif %}
+</body>
+</html>
